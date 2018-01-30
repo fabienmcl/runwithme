@@ -4,13 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="miage.parisnanterre.fr.runwithme.MainActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="miage.parisnanterre.fr.runwithme.TrackingActivity"
+    tools:showIn="@layout/tracking_activity">
 
-    <Button
-        android:id="@+id/button_tracking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tracking"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="194dp" />
 </android.support.constraint.ConstraintLayout>
