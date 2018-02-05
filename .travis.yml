@@ -1,45 +1,23 @@
 language: android
-
-android:
-  components:
-    - tools                             # Tools
-    - platform-tools                    # Platform tools
-    - build-tools-25.0.2                # Build tools version
-    - android-25                        # Target SDK version
-    - extra-android-m2repository        # Support repo
-    - sys-img-armeabi-v7a-android-18    # Emulator
-
-jdk:
-  - oraclejdk8
-
-script:
-#  - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
-#  - ./gradlew build
-  - chmod +x ./gradlew
-
+jdk: oraclejdk8
 env:
   global:
-    - secure: "SONATYPE_NEXUS_USERNAME TODO"
-
-branches:
-  except:
-    - gh-pages
-
-notifications:
-  email: false
-
-sudo: false
-
-cache:
-  directories:
-    - $HOME/.gradle
-
-#after_success:
-#- ./gradlew jacocoTestReport coveralls
-before_install:
-    - pip install --user codecov    #Install codecov
-
+    - ANDROID_TARGET=android-15
+    - ANDROID_ABI=armeabi-v7a
+android:
+  components:
+  - tools
+  - platform-tools
+  - build-tools-23.0.3
+  - android-23
+  - extra-android-m2repository
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+script:
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - ./gradlew connectedCheck
 after_success:
-    - codecov                       #Run codecov
-
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
+- bash <(curl -s https://codecov.io/bash)
