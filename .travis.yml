@@ -34,5 +34,12 @@ cache:
   directories:
     - $HOME/.gradle
 
+#after_success:
+#- ./gradlew jacocoTestReport coveralls
+before_install:
+    - pip install --user codecov    #Install codecov
+
 after_success:
-- ./gradlew jacocoTestReport coveralls
+    - codecov                       #Run codecov
+
+after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
