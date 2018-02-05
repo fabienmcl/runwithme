@@ -1,45 +1,23 @@
 language: android
 
-android:
-  components:
-    - tools                             # Tools
-    - platform-tools                    # Platform tools
-    - build-tools-25.0.2                # Build tools version
-    - android-25                        # Target SDK version
-    - extra-android-m2repository        # Support repo
-    - sys-img-armeabi-v7a-android-18    # Emulator
-
-jdk:
-  - oraclejdk8
-
-script:
-#  - ./gradlew check jacocoTestReport coveralls sendCoverageToCodacy
-#  - ./gradlew build
-  - ./gradlew build coveralls
-
-before_install:
- - chmod +x gradlew
-
 env:
-  global:
-    - secure: "SONATYPE_NEXUS_USERNAME TODO"
   matrix:
-    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
-
-branches:
-  except:
-    - gh-pages
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
 
 notifications:
-  email: false
+  email:none
 
-sudo: false
+android:
+  components:
+    - build-tools-22.0.1
+    - android-23
+    - extra-android-m2repository
 
-cache:
-  directories:
-    - $HOME/.gradle
-    
+    - android-22
+    - sys-img-armeabi-v7a-android-22
+
 before_script:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
@@ -48,4 +26,4 @@ script:
   - echo "Travis branch is $TRAVIS_BRANCH"
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
   
-  - ./gradlew connectedAndroidTest coveralls
+- ./gradlew connectedAndroidTest coveralls
