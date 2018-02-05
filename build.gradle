@@ -1,16 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-plugins {
-    id 'jacoco'
-    id 'com.github.ProjetRun.runwithme.coveralls' version '2.6.3'
-}
+version '1.0-SNAPSHOT'
 
-jacocoTestReport {
-    reports {
-        xml.enabled = true // coveralls plugin depends on xml format report
-        html.enabled = true
-    }
-}
+apply plugin: 'java'
+apply plugin: "jacoco"
+apply plugin: "com.github.kt3k.coveralls"
+
+sourceCompatibility = 1.8
 
 buildscript {
     
@@ -40,3 +36,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+ }
