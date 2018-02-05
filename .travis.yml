@@ -23,6 +23,8 @@ before_install:
 env:
   global:
     - secure: "SONATYPE_NEXUS_USERNAME TODO"
+  matrix:
+    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
 
 branches:
   except:
@@ -37,5 +39,14 @@ cache:
   directories:
     - $HOME/.gradle
     
-after_success:
-- ./gradlew jacocoTestReport coveralls
+before_script:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
+script:
+  - echo "Travis branch is $TRAVIS_BRANCH"
+  - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+  
+  - ./gradlew connectedAndroidTest coveralls
