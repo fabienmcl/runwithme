@@ -25,5 +25,7 @@ before_script:
 script:
   - echo "Travis branch is $TRAVIS_BRANCH"
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
+  - "bundle exec rake neo4j:install['community-2.2.0-M02'] neo4j:start default --trace"
+
   
 - ./gradlew connectedAndroidTest coveralls
