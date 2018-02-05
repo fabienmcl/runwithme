@@ -1,5 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-/*
+
 plugins {
     id 'jacoco'
     id 'com.github.ProjetRun.runwithme.coveralls' version '2.6.3'
@@ -11,7 +11,7 @@ jacocoTestReport {
         html.enabled = true
     }
 }
-*/
+
 buildscript {
     
     repositories {
