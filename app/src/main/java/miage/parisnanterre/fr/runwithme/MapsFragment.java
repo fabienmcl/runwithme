@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -105,7 +106,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         map.animateCamera(CameraUpdateFactory.zoomIn());
         map.addMarker(new MarkerOptions()
                 .position(currentLocation)
-                .title("Je suis ici !"));
+                .title("Je suis ici !")
+        .icon(BitmapDescriptorFactory.fromResource(R.drawable.little_boy_blue)));
 
         // Zoom out to zoom level 12, animating with a duration of 2 seconds.
         map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
