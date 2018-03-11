@@ -8,7 +8,7 @@
             android:id="@+id/nav_stats"
             android:icon="@drawable/ic_run"
             android:title="Mes statistiques" />
-        <item
+ <!--       <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />
@@ -20,8 +20,12 @@
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
+
+          -->
     </group>
 
+
+    <!--
     <item android:title="Communicate">
         <menu>
             <item
@@ -32,7 +36,12 @@
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
+
+
         </menu>
+
+
     </item>
+    -->
 
 </menu>

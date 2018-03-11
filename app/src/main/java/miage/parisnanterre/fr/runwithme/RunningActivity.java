@@ -251,6 +251,11 @@ public class RunningActivity extends AppCompatActivity {
 
     public void cancel_share(View v){
 
+        Intent MainActivityIntent = new Intent(RunningActivity.this, RunningActivity.class);
+        startActivity(MainActivityIntent);
+        super.onBackPressed();
+        finish();
+
     }
 
     public void back_to_homeactivity(View v){

@@ -138,7 +138,8 @@
             android:background="#03A9F4"
             android:textColor="@android:color/white"
             android:text="Annuler"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="cancel_share"/>
 
     </LinearLayout>
 
